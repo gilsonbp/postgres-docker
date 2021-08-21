@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:latest
+    restart: "no"
+    environment:
+      POSTGRES_USER: gilson
+      POSTGRES_PASSWORD: nenco
+    ports:
+      - "5432:5432"
+    volumes:  
+      - "${HOME}/postgres-db/data/:/var/lib/postgresql/data"
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: "no"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: gilsonbp@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: nenco
+    ports:
+      - "8080:80"
+    volumes:  
+      - "${HOME}/postgres-db/data/:/var/lib/postgresql/data"
+    depends_on: 
+      - db
+  
