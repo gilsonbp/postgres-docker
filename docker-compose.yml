@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: nenco
     ports:
       - "5432:5432"
-    volumes:  
+    volumes:
       - "${HOME}/postgres-db/data/:/var/lib/postgresql/data"
   pgadmin:
     image: dpage/pgadmin4
@@ -19,8 +19,5 @@ services:
       PGADMIN_DEFAULT_PASSWORD: nenco
     ports:
       - "8080:80"
-    volumes:  
-      - "${HOME}/postgres-db/data/:/var/lib/postgresql/data"
-    depends_on: 
+    depends_on:
       - db
-  
