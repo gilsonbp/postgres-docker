@@ -2,8 +2,8 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:latest
-    restart: "no"
+    image: postgres:13
+    restart: "always"
     environment:
       POSTGRES_USER: gilson
       POSTGRES_PASSWORD: nenco
@@ -13,7 +13,7 @@ services:
       - "${HOME}/postgres-db/data/:/var/lib/postgresql/data"
   pgadmin:
     image: dpage/pgadmin4
-    restart: "no"
+    restart: "always"
     environment:
       PGADMIN_DEFAULT_EMAIL: gilsonbp@gmail.com
       PGADMIN_DEFAULT_PASSWORD: nenco
@@ -21,3 +21,15 @@ services:
       - "8080:80"
     depends_on:
       - db
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: rabbitmq
+    restart: "always"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_VHOST: local
+      RABBITMQ_ERLANG_COOKIE: 6085e2412b6fa88647466c6a81c0cea0
+    ports:
+      - 5672:5672
+      - 15672:15672
